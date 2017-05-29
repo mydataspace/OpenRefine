@@ -52,6 +52,8 @@ abstract public class ExporterRegistry {
         s_formatToExporter.put("html", new HtmlTableExporter());
         
         s_formatToExporter.put("template", new TemplatingExporter());
+        
+        s_formatToExporter.put("mydataspace", new MyDataSpaceExporter());
     }
     
     static public void registerExporter(String format, Exporter exporter) {

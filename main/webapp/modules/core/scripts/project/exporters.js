@@ -23,8 +23,8 @@ LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
 A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
 OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
 SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
-LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,           
-DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY           
+LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
 THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
@@ -124,12 +124,12 @@ ExporterManager.handlers.exportRows = function(format, ext) {
   var form = ExporterManager.prepareExportRowsForm(format, true, ext);
   $('<input />')
   .attr("name", "contentType")
-  .attr("value", "application/x-unknown") // force download
+  // .attr("value", "application/x-unknown") // force download
   .appendTo(form);
-  
+
   document.body.appendChild(form);
 
-  window.open("about:blank", "refine-export");
+  // window.open("about:blank", "refine-export");
   form.submit();
 
   document.body.removeChild(form);
@@ -141,8 +141,8 @@ ExporterManager.prepareExportRowsForm = function(format, includeEngine, ext) {
   $(form)
   .css("display", "none")
   .attr("method", "post")
-  .attr("action", "command/core/export-rows/" + name + ((ext) ? ("." + ext) : ""))
-  .attr("target", "refine-export");
+  .attr("action", "command/core/export-rows/" + name + ((ext) ? ("." + ext) : ""));
+  // .attr("target", "refine-export");
 
   $('<input />')
   .attr("name", "project")
@@ -158,7 +158,7 @@ ExporterManager.prepareExportRowsForm = function(format, includeEngine, ext) {
     .attr("value", JSON.stringify(ui.browsingEngine.getJSON()))
     .appendTo(form);
   }
-  
+
   return form;
 };
 

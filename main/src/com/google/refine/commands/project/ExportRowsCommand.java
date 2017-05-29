@@ -50,6 +50,7 @@ import com.google.refine.commands.Command;
 import com.google.refine.exporters.CsvExporter;
 import com.google.refine.exporters.Exporter;
 import com.google.refine.exporters.ExporterRegistry;
+import com.google.refine.exporters.MyDataSpaceExporter;
 import com.google.refine.exporters.StreamExporter;
 import com.google.refine.exporters.WriterExporter;
 import com.google.refine.model.Project;
@@ -78,12 +79,8 @@ public class ExportRowsCommand extends Command {
             Engine engine = getEngine(request, project);
             Properties params = getRequestParameters(request);
             
-            String format = params.getProperty("format");
-            Exporter exporter = ExporterRegistry.getExporter(format);
-            if (exporter == null) {
-                exporter = new CsvExporter('\t');
-            }
-            
+            Exporter exporter = new MyDataSpaceExporter();
+
             String contentType = params.getProperty("contentType");
             if (contentType == null) {
                 contentType = exporter.getContentType();

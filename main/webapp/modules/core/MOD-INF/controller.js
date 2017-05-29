@@ -23,8 +23,8 @@ LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
 A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
 OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
 SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
-LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,           
-DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY           
+LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
 THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
@@ -37,7 +37,7 @@ var ClientSideResourceManager = Packages.com.google.refine.ClientSideResourceMan
 var bundle = true;
 
 var templatedFiles = {
-  // Requests with last path segments mentioned here 
+  // Requests with last path segments mentioned here
   // will get served from .vt files with the same names
   "index" : {
     outputEncodings: true
@@ -100,7 +100,7 @@ function registerCommands() {
 
   RS.registerCommand(module, "get-languages", Packages.com.google.refine.commands.lang.GetLanguagesCommand());
   RS.registerCommand(module, "load-language", Packages.com.google.refine.commands.lang.LoadLanguageCommand());
-  
+
   RS.registerCommand(module, "add-column", new Packages.com.google.refine.commands.column.AddColumnCommand());
   RS.registerCommand(module, "add-column-by-fetching-urls", new Packages.com.google.refine.commands.column.AddColumnByFetchingURLsCommand());
   RS.registerCommand(module, "remove-column", new Packages.com.google.refine.commands.column.RemoveColumnCommand());
@@ -131,7 +131,7 @@ function registerCommands() {
 
   RS.registerCommand(module, "get-expression-language-info", new Packages.com.google.refine.commands.expr.GetExpressionLanguageInfoCommand());
   RS.registerCommand(module, "get-expression-history", new Packages.com.google.refine.commands.expr.GetExpressionHistoryCommand());
-  RS.registerCommand(module, "get-starred-expressions", new Packages.com.google.refine.commands.expr.GetStarredExpressionsCommand());     
+  RS.registerCommand(module, "get-starred-expressions", new Packages.com.google.refine.commands.expr.GetStarredExpressionsCommand());
   RS.registerCommand(module, "toggle-starred-expression", new Packages.com.google.refine.commands.expr.ToggleStarredExpressionCommand());
   RS.registerCommand(module, "log-expression", new Packages.com.google.refine.commands.expr.LogExpressionCommand());
   RS.registerCommand(module, "preview-expression", new Packages.com.google.refine.commands.expr.PreviewExpressionCommand());
@@ -140,7 +140,7 @@ function registerCommands() {
   RS.registerCommand(module, "get-all-preferences", new Packages.com.google.refine.commands.GetAllPreferencesCommand());
   RS.registerCommand(module, "set-preference", new Packages.com.google.refine.commands.SetPreferenceCommand());
   RS.registerCommand(module, "open-workspace-dir", new Packages.com.google.refine.commands.OpenWorkspaceDirCommand());
-  
+
   RS.registerCommand(module, "authorize", new Packages.com.google.refine.commands.auth.AuthorizeCommand());
   RS.registerCommand(module, "deauthorize", new Packages.com.google.refine.commands.auth.DeAuthorizeCommand());
 }
@@ -231,7 +231,7 @@ function registerImporting() {
   IM.registerExtension(".xlsx", "binary/text/xml/xls/xlsx");
 
   IM.registerExtension(".ods", "text/xml/ods");
-  
+
   IM.registerExtension(".n3", "text/rdf+n3");
 
   IM.registerExtension(".marc", "text/marc");
@@ -246,7 +246,7 @@ function registerImporting() {
   IM.registerMimeType("text/tab-separated-value", "text/line-based/*sv");
 
   IM.registerMimeType("text/fixed-width", "text/line-based/fixed-width");
-  
+
   IM.registerMimeType("text/rdf+n3", "text/rdf+n3");
 
   IM.registerMimeType("application/msexcel", "binary/text/xml/xls/xlsx");
@@ -256,7 +256,7 @@ function registerImporting() {
   IM.registerMimeType("application/x-excel", "binary/text/xml/xls/xlsx");
   IM.registerMimeType("application/xls", "binary/text/xml/xls/xlsx");
   IM.registerMimeType("application/x-xls", "binary/text/xml/xls/xlsx");
-  
+
   IM.registerMimeType("application/vnd.oasis.opendocument.spreadsheet","text/xml/ods");
 
   IM.registerMimeType("application/json", "text/json");
@@ -304,7 +304,7 @@ function init() {
     "index/scripts",
     module,
     [
-      
+
       "externals/jquery-1.11.1.js",
       "externals/jquery-migrate-1.2.1.js",
       "externals/jquery.cookie.js",
@@ -325,9 +325,9 @@ function init() {
 
       "scripts/index.js",
       "scripts/index/create-project-ui.js",
-      "scripts/index/open-project-ui.js",
-      "scripts/index/import-project-ui.js",
-      "scripts/index/lang-settings-ui.js",
+      // "scripts/index/open-project-ui.js",
+      // "scripts/index/import-project-ui.js",
+      // "scripts/index/lang-settings-ui.js",
 
       "scripts/index/default-importing-controller/controller.js",
       "scripts/index/default-importing-controller/file-selection-panel.js",
@@ -355,7 +355,7 @@ function init() {
       "styles/pure.css",
       "styles/util/dialog.less",
       "styles/util/encoding.less",
-      
+
       "styles/index.less",
       "styles/index/create-project-ui.less",
       "styles/index/open-project-ui.less",
@@ -513,10 +513,10 @@ function process(path, request, response) {
   if (path == "wirings.js") {
     var wirings = butterfly.getWirings(request);
     butterfly.sendString(
-      request, 
-      response, 
-      "var ModuleWirings = " + butterfly.toJSONString(wirings) + ";", 
-      encoding, 
+      request,
+      response,
+      "var ModuleWirings = " + butterfly.toJSONString(wirings) + ";",
+      encoding,
       "text/javascript"
     );
   } else {
@@ -547,8 +547,8 @@ function process(path, request, response) {
             input = new Packages.java.io.BufferedReader(
                 new Packages.java.io.InputStreamReader(urlConnection.getInputStream()));
 
-            output.write("/* ===== "); 
-            output.write(qualifiedPath.fullPath); 
+            output.write("/* ===== ");
+            output.write(qualifiedPath.fullPath);
             output.write(" ===== */\n\n");
 
             Packages.org.apache.commons.io.IOUtils.copy(input, output);
@@ -577,10 +577,10 @@ function process(path, request, response) {
           params.put(name, request.getParameterValues(name)[0]);
         }
         context.params = params;
-        
+
         // We prepend '' to convert the Java string to a Javascript string.
         context.projectID = ('' + request.getParameter("project")).replace(/\D/g, '');
-        
+
         var styles = ClientSideResourceManager.getPaths(lastSegment + "/styles");
         var styleInjection = [];
         for each (var qualifiedPath in styles) {
@@ -600,10 +600,10 @@ function process(path, request, response) {
           }
           context.scriptInjection = scriptInjection.join("\n");
         }
-        
+
         if (templatedFiles[lastSegment].outputEncodings) {
           var encodings = [];
-          
+
           var sortedCharsetMap = Packages.java.nio.charset.Charset.availableCharsets();
           for each (var code in sortedCharsetMap.keySet().toArray()) {
             var charset = sortedCharsetMap.get(code);
@@ -611,18 +611,18 @@ function process(path, request, response) {
             for each (var alias in charset.aliases().toArray()) {
               aliases.push(alias);
             }
-            
+
             encodings.push({
               code: code,
               name: charset.displayName(),
               aliases: aliases
             });
           }
-          
+
           context.encodingJson = butterfly.toJSONString(encodings);
           context.defaultEncoding = butterfly.toJSONString(Packages.java.nio.charset.Charset.defaultCharset().name());
         }
-        
+
         send(request, response, path + ".vt", context);
       }
     }
