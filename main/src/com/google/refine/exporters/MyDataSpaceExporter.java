@@ -36,10 +36,12 @@ package com.google.refine.exporters;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 import java.util.UUID;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.slf4j.Logger;
@@ -93,6 +95,7 @@ public class MyDataSpaceExporter implements WriterExporter{
         final CSVWriter csvWriter = 
             new CSVWriter(fileWriter, separator.charAt(0), CSVWriter.DEFAULT_QUOTE_CHARACTER, lineSeparator);
         
+        final List<String> header = new ArrayList<>();
         
         class Serializer implements TabularSerializer {
             int linesWritten = 0;
@@ -106,11 +109,11 @@ public class MyDataSpaceExporter implements WriterExporter{
             }
 
             @Override
-            public void addRow(List<CellData> cells, boolean isHeader) {
+            public void addRow(final List<CellData> cells, final boolean isHeader) {
                 if (!isHeader || printColumnHeader) {
-                    String[] strings = new String[cells.size()];
+                    final String[] strings = new String[cells.size()];
                     for (int i = 0; i < strings.length; i++) {
-                        CellData cellData = cells.get(i);
+                        final CellData cellData = cells.get(i);
                         strings[i] =
                             (cellData != null && cellData.text != null) ?
                             cellData.text :
@@ -119,6 +122,13 @@ public class MyDataSpaceExporter implements WriterExporter{
                     csvWriter.writeNext(strings, quoteAll);
                     linesWritten++;
                 }
+                
+                if (isHeader) {
+                    for (int i = 0; i < cells.size(); i++) {
+                        final CellData cellData = cells.get(i);
+                        header.add((cellData != null && cellData.text != null) ? cellData.text : "");
+                    }
+                }
             }
         };
         
@@ -126,7 +136,19 @@ public class MyDataSpaceExporter implements WriterExporter{
         
         CustomizableTabularExporterUtilities.exportRows(project, engine, params, serializer);
         
-        writer.write("<script>window.parent.postMessage({ message: 'openRefineImport', id: '" + fileName + "', stage: 'created' }, '*')</script>");
+        final JSONObject msg = new JSONObject();
+        try {
+            msg.put("message", "openRefineImport");
+            msg.put("id", fileName);
+            msg.put("stage", "created");
+            msg.put("header", new JSONArray(header));
+        } catch (JSONException e1) {
+            // TODO Auto-generated catch block
+            e1.printStackTrace();
+        }
+
+        writer.write("<script>window.parent.postMessage(" + msg.toString() + ", '*')</script>");
+//        writer.write("<script>window.parent.postMessage({ message: 'openRefineImport', id: '" + fileName + "', stage: 'created' }, '*')</script>");
         
         try {
             final JSONObject stats = new JSONObject();
