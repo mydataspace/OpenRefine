@@ -141,6 +141,7 @@ public class MyDataSpaceExporter implements WriterExporter{
             msg.put("message", "openRefineImport");
             msg.put("id", fileName);
             msg.put("stage", "created");
+            msg.put("projectID", project.id);
             msg.put("header", new JSONArray(header));
         } catch (JSONException e1) {
             // TODO Auto-generated catch block
@@ -148,8 +149,7 @@ public class MyDataSpaceExporter implements WriterExporter{
         }
 
         writer.write("<script>window.parent.postMessage(" + msg.toString() + ", '*')</script>");
-//        writer.write("<script>window.parent.postMessage({ message: 'openRefineImport', id: '" + fileName + "', stage: 'created' }, '*')</script>");
-        
+
         try {
             final JSONObject stats = new JSONObject();
             stats.put("lines", serializer.linesWritten);
