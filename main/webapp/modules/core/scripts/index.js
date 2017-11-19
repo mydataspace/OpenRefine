@@ -117,10 +117,10 @@ $(function() {
 //                  ]
 //          }
           
-          var script = $('<script></script>')
-          .attr("src", "http://google-refine.googlecode.com/svn/support/releases.js")
-          .attr("type", "text/javascript");
-          document.body.appendChild(script[0]);
+//          var script = $('<script></script>')
+//          .attr("src", "http://google-refine.googlecode.com/svn/support/releases.js")
+//          .attr("type", "text/javascript");
+//          document.body.appendChild(script[0]);
 
           var poll = function() {
             if ("releases" in window) {
