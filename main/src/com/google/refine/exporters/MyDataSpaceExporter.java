@@ -54,6 +54,10 @@ import com.google.refine.model.Project;
 import com.google.refine.util.JSONUtilities;
 import com.google.refine.util.ParsingUtilities;
 
+/**
+ * @author fiftin
+ * Stores data to file system in CSV format and prints JavaScript which sends to parent window info about stored file.
+ */
 public class MyDataSpaceExporter implements WriterExporter{
 
     final static Logger logger = LoggerFactory.getLogger("CsvExporter");
@@ -147,8 +151,10 @@ public class MyDataSpaceExporter implements WriterExporter{
             // TODO Auto-generated catch block
             e1.printStackTrace();
         }
-
-        writer.write("<script>window.parent.postMessage(" + msg.toString() + ", '*')</script>");
+        
+        final String json = msg.toString();
+        System.out.println(json);
+        writer.write("<script>window.parent.postMessage(" + json + ", '*')</script>");
 
         try {
             final JSONObject stats = new JSONObject();

@@ -47,9 +47,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.refine.ProjectManager;
 import com.google.refine.browsing.Engine;
 import com.google.refine.commands.Command;
-import com.google.refine.exporters.CsvExporter;
 import com.google.refine.exporters.Exporter;
-import com.google.refine.exporters.ExporterRegistry;
 import com.google.refine.exporters.MyDataSpaceExporter;
 import com.google.refine.exporters.StreamExporter;
 import com.google.refine.exporters.WriterExporter;
@@ -82,7 +80,7 @@ public class ExportRowsCommand extends Command {
             Exporter exporter = new MyDataSpaceExporter();
 
             String contentType = params.getProperty("contentType");
-            if (contentType == null) {
+            if (contentType == null || contentType.equals("")) {
                 contentType = exporter.getContentType();
             }
             response.setHeader("Content-Type", contentType);
